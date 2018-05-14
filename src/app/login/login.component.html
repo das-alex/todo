@@ -1,0 +1,9 @@
+<form>
+  <p>Authorization</p>
+  <p class="messages"></p>
+  <label for="inputLogin">Email</label>
+  <input id="inputLogin" [(ngModel)]="email" name="email" type="text">
+  <label for="inputPassword">Password</label>
+  <input id="inputPassword" [(ngModel)]="password" name="password" type="password">
+  <button (click)="login(email, password)">Submit</button>
+</form>

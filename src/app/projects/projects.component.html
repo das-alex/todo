@@ -1,0 +1,5 @@
+<div class="block_list-of-projects">
+  <ul class="list-of-projects">
+    <li *ngFor="let project of projects"><a (click)="openProject(project._id)">{{project.name}}</a></li>
+  </ul>
+</div>

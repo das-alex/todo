@@ -1,0 +1,25 @@
+<div class="task-add">
+  <p>Adding new task</p>
+  <p *ngIf="message">{{message.message}}</p>
+  <form action="">
+    <label for="">Task: <input [(ngModel)]="taskName" name="taskName" type="text"></label>
+    <button (click)="addTask(taskName)">Add</button>
+  </form>
+</div>
+<div class="tasks-table">
+  <div class="task-todo">
+    <ul class="tasks-list">
+      <li *ngFor="let task of tasks"><span *ngIf="task.status == 'todo'">{{task.task}}</span></li>
+    </ul>
+  </div>
+  <div class="tasks-doing">
+    <ul class="tasks-list">
+      <li *ngFor="let task of tasks"><span *ngIf="task.status == 'doing'">{{task.task}}</span></li>
+    </ul>
+  </div>
+  <div class="tasks-done">
+    <ul class="tasks-list">
+      <li *ngFor="let task of tasks"><span *ngIf="task.status == 'done'">{{task.task}}</span></li>
+    </ul>
+  </div>
+</div>
