@@ -12,7 +12,6 @@ export class DataShareService  {
 
     getStringData() {
         const tmp = this.stringData;
-        // this.stringData = undefined;
         return tmp;
     }
 }

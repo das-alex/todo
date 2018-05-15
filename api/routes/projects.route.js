@@ -52,7 +52,7 @@ function projectById(project) {
 }
 
 //adding project
-proj.post('/addProject', (req, res, next) => {
+proj.post('/addProject', checkAuth, (req, res, next) => {
     Projects.find({name: req.body.name})
         .exec()
         .then(addingProject => {

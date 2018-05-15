@@ -5,12 +5,41 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .dashboard_name {
     margin-left: 10px;
+    font-weight: bold;
 }
 
 .dashboard_user_profile {
     margin-right: 10px;
+}
+
+.user_email {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 12px;
+}
+
+.logout_link {
+    display: inline-block;
+    margin-left: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    border-radius: 4px;
+    padding: 5px 10px;
+    transition: all .3s;
+}
+
+.logout_link:hover {
+    transition: all .3s;
+    box-shadow: 0 0 3px 1px #ccc;
 }

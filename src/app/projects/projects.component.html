@@ -1,7 +1,17 @@
+<div class="add_project">
+  <button class="custom_green_button" (click)="addProjectButtonFn()">+ Add new project</button>
+</div>
 <div class="block_list_of_projects">
+  <div class="add_project_area" *ngIf="addProjectButton">
+    <form class="add_project_form" action="">
+      <label for="projectName">Name of project</label>
+      <input [(ngModel)]="projectName" name="projectName" type="text">
+      <button (click)="addProject(projectName)" class="custom_green_button project_save">Save</button>
+    </form>
+  </div>
   <ng-container *ngIf="projects">
     <div class="project_card" *ngFor="let project of projects">
-      <p (click)="openProject(project._id)">{{project.name}}</p>
+      <p (click)="openProject(project._id, project.name)">{{project.name}}</p>
       <div class="project_additional_actions">
 
       </div>

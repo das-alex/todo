@@ -14,7 +14,7 @@ import { AuthServices } from '../__services/auth.service';
   ]
 })
 export class TasksComponent implements OnInit {
-  public projectId: string = this.dataShare.getStringData();
+  public projectId: string;
   public message: string;
   public todo: Tasks[] = [];
   public doing: Tasks[] = [];
@@ -24,7 +24,9 @@ export class TasksComponent implements OnInit {
     private dataShare: DataShareService,
     private tasksService: TasksService,
     private auth: AuthServices
-  ) {}
+  ) {
+    this.projectId = this.dataShare.getStringData();
+  }
 
   ngOnInit() {
     this.getTasks();
