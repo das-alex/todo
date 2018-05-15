@@ -1,5 +1,10 @@
-<div class="block_list-of-projects">
-  <ul class="list-of-projects">
-    <li *ngFor="let project of projects"><a (click)="openProject(project._id)">{{project.name}}</a></li>
-  </ul>
+<div class="block_list_of_projects">
+  <ng-container *ngIf="projects">
+    <div class="project_card" *ngFor="let project of projects">
+      <p (click)="openProject(project._id)">{{project.name}}</p>
+      <div class="project_additional_actions">
+
+      </div>
+    </div>
+  </ng-container>
 </div>

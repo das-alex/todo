@@ -16,7 +16,9 @@ import { AuthServices } from '../__services/auth.service';
 export class TasksComponent implements OnInit {
   public projectId: string = this.dataShare.getStringData();
   public message: string;
-  public tasks: Tasks[] = [];
+  public todo: Tasks[] = [];
+  public doing: Tasks[] = [];
+  public done: Tasks[] = [];
 
   constructor(
     private dataShare: DataShareService,
@@ -30,7 +32,15 @@ export class TasksComponent implements OnInit {
 
   getTasks() {
     this.tasksService.getListOfTasks(this.projectId)
-      .subscribe(result => this.tasks = result);
+      .subscribe(result => result.forEach(item => {
+        if (item.status === 'todo') {
+          this.todo.push(item);
+        } else if (item.status === 'doing') {
+          this.doing.push(item);
+        } else {
+          this.doing.push(item);
+        }
+      }));
   }
 
   addTask(taskName: string) {

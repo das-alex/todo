@@ -1,4 +1,4 @@
-<div class="task-add">
+<div class="task_add">
   <p>Adding new task</p>
   <p *ngIf="message">{{message.message}}</p>
   <form action="">
@@ -6,20 +6,38 @@
     <button (click)="addTask(taskName)">Add</button>
   </form>
 </div>
-<div class="tasks-table">
-  <div class="task-todo">
-    <ul class="tasks-list">
-      <li *ngFor="let task of tasks"><span *ngIf="task.status == 'todo'">{{task.task}}</span></li>
-    </ul>
+<div class="tasks_table">
+  <div class="tasks_todo">
+    <h3>Todo</h3>
+    <ng-container *ngIf="todo.length">
+        <div class="task_card" *ngFor="let itemTask of todo">
+            <p>{{itemTask.task}}</p>
+            <div class="task_additional_actions">
+      
+            </div>
+          </div>
+    </ng-container>
   </div>
-  <div class="tasks-doing">
-    <ul class="tasks-list">
-      <li *ngFor="let task of tasks"><span *ngIf="task.status == 'doing'">{{task.task}}</span></li>
-    </ul>
+  <div class="tasks_doing">
+    <h3>Doing</h3>
+    <ng-container *ngIf="doing.length">
+        <div class="task_card" *ngFor="let itemTask of doing">
+            <p>{{itemTask.task}}</p>
+            <div class="task_additional_actions">
+              
+            </div>
+          </div>
+    </ng-container>
   </div>
-  <div class="tasks-done">
-    <ul class="tasks-list">
-      <li *ngFor="let task of tasks"><span *ngIf="task.status == 'done'">{{task.task}}</span></li>
-    </ul>
+  <div class="tasks_done">
+    <h3>Done</h3>
+    <ng-container *ngIf="done.length">
+        <div class="task_card" *ngFor="let itemTask of done">
+            <p>{{itemTask.task}}</p>
+            <div class="task_additional_actions">
+              
+            </div>
+          </div>
+    </ng-container>
   </div>
 </div>
