@@ -45,4 +45,9 @@ export class ProjectsComponent implements OnInit {
       .subscribe(result => console.log(result));
   }
 
+  deleteProject(projectId: string) {
+    this.projectsService.deleteProject(projectId, this.auth.userId)
+      .subscribe(result => console.log(result));
+  }
+
 }

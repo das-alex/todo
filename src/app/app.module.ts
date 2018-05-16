@@ -15,6 +15,7 @@ import { AuthGuardService } from './__services/auth-guard.service';
 import { ProjectsService } from './__services/projects.service';
 import { DataShareService } from './__services/data-share.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { IterationsComponent } from './iterations/iterations.component';
 
 const routs: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,7 +50,8 @@ const routs: Routes = [
     TasksComponent,
     NotFoundComponent,
     ProjectsComponent,
-    DashboardComponent
+    DashboardComponent,
+    IterationsComponent
   ],
   imports: [
     BrowserModule,

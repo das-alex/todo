@@ -44,4 +44,12 @@ export class ProjectsService {
                 return projectResponse.json();
             });
     }
+
+    deleteProject(projectId: string, userId: string) {
+        const options = this.returnHeaders('auth');
+        return this.http.delete(this.serverUrl + '/' + projectId + '&' + userId, options)
+            .map((deletedProject: Response) => {
+                return deletedProject.json();
+            });
+    }
 }

@@ -8,7 +8,7 @@ var checkAuth = require('../middleware/auth.middleware.js');
 
 // + get list of projects for user
 // + add project
-// remove project
+// + remove project
 // update project
 
 //get list of projects for concrete user
@@ -89,6 +89,37 @@ proj.post('/addProject', checkAuth, (req, res, next) => {
         .catch(addingProjectError => {
             res.status(500).json({
                 message: addingProjectError
+            });
+        });
+});
+
+//remove project from projects and user projects array
+proj.delete('/:projectId&:userId', checkAuth, (req, res, next) => {
+    Projects.find({_id: req.params.projectId})
+        .remove()
+        .exec()
+        .then(data => {
+            if(data.n) {
+                Users.findByIdAndUpdate(req.params.userId,
+                    {$pull: {projects: req.params.projectId}},
+                    {new: true},
+                    (err, removedFromUserProjects) => {
+                        res.status(200).json({
+                            message: 'Project was deleted successfully',
+                            removed: true,
+                            removedProject: req.params.projectId
+                        });
+                    });
+            } else {
+                res.status(200).json({
+                    message: 'Project was not found',
+                    deleted: false
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: err
             });
         });
 });
