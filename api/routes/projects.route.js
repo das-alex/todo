@@ -4,7 +4,6 @@ var express = require('express'),
 
 var Projects = require('../models/projects.model.js');
 var Users = require('../models/users.model.js');
-var Backlog = require('../models/backlog-proj.model.js');
 var checkAuth = require('../middleware/auth.middleware.js');
 
 // + get list of projects for user

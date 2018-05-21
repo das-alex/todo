@@ -4,6 +4,7 @@ export interface Tasks {
     describe: string;
     status: string;
     points: number;
+    inBacklog: boolean;
     idProject: string;
     idIteration: string;
 }

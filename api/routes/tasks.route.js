@@ -14,7 +14,7 @@ var checkAuth = require('../middleware/auth.middleware.js');
 //get list of tasks
 tasks.get('/:projectId&:iterationId', checkAuth,(req, res, next) => {
     Tasks.find({idProject: req.params.projectId, idIteration: req.params.iterationId})
-        .select('_id task status describe points')
+        .select('_id task status describe points inBacklog')
         .exec()
         .then(data => {
             var response = {
@@ -25,6 +25,7 @@ tasks.get('/:projectId&:iterationId', checkAuth,(req, res, next) => {
                         status: task.status,
                         describe: task.describe,
                         points: task.points,
+                        inBacklog: task.inBacklog,
                         _id: task._id
                     }
                 })
@@ -60,6 +61,7 @@ tasks.post('/addTask', checkAuth,(req, res, next) => {
         describe: req.body.describe,
         status: req.body.status,
         points: req.body.points,
+        inBacklog: false,
         idUser: req.body.idUser,
         idProject: req.body.idProject,
         idIteration: req.body.idIteration
@@ -109,7 +111,8 @@ tasks.patch('/update/:taskId', checkAuth, (req, res, next) => {
         task: req.body.task,
         status: req.body.status,
         describe: req.body.describe,
-        points: req.body.points
+        points: req.body.points,
+        inBacklog: req.body.inBacklog
     });
     Tasks.findOneAndUpdate({_id: req.params.taskId}, {$set: task}, {new: true})
         .exec()

@@ -6,8 +6,7 @@ var projectSchema = mongo.Schema({
     backlog: [
         {
             name: String,
-            describe: String,
-            require: true
+            describe: String
         }
     ],
     userOwner: {

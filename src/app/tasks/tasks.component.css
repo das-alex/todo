@@ -44,6 +44,20 @@
     justify-content: space-around;
 }
 
+.backlog_modal {
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    overflow-y: auto;
+    left: calc(50% - 250px);
+    top: calc(50% - 220px);
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    box-shadow: 0 0 3px 3px #ccc;
+    border-radius: 4px;
+}
+
 .tasks_todo,
 .tasks_doing,
 .tasks_done {

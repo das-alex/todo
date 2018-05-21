@@ -1,3 +1,7 @@
+<div class="additional_buttons">
+  <button class="custom_green_button" (click)="showAddButton()">Add new task</button>
+  <button class="custom_green_button" (click)="showBacklog()">Backlog</button>
+</div>
 <div class="tasks_table">
   <div class="tasks_todo">
     <h3>Todo</h3>
@@ -11,6 +15,9 @@
           <div class="task_additional_actions">
             <button (click)="deleteTask(itemTask._id)">delete</button>
             <button (click)="editTask(itemTask)">edit</button>
+            <button (click)="toBacklog(itemTask._id)">to backlog</button>
+            <button (click)="changeStatus(itemTask._id, 'doing')">doing</button>
+            <button (click)="changeStatus(itemTask._id, 'done')">done</button>
           </div>
         </div>
     </ng-container>
@@ -27,6 +34,9 @@
           <div class="task_additional_actions">
             <button (click)="deleteTask(itemTask._id)">delete</button>
             <button (click)="editTask(itemTask)">edit</button>
+            <button (click)="toBacklog(itemTask._id)">to backlog</button>
+            <button (click)="changeStatus(itemTask._id, 'todo')">todo</button>
+            <button (click)="changeStatus(itemTask._id, 'done')">done</button>
           </div>
         </div>
     </ng-container>
@@ -43,6 +53,9 @@
           <div class="task_additional_actions">
             <button (click)="deleteTask(itemTask._id)">delete</button>
             <button (click)="editTask(itemTask)">edit</button>
+            <button (click)="toBacklog(itemTask._id)">to backlog</button>
+            <button (click)="changeStatus(itemTask._id, 'todo')">todo</button>
+            <button (click)="changeStatus(itemTask._id, 'doing')">doing</button>
           </div>
         </div>
     </ng-container>
@@ -78,7 +91,25 @@
       </div>
     <div class="form_edit_task_buttons">
         <button (click)="addTask(taskName,description,status,points)" class="custom_green_button">Save</button>
-        <button (click)="cancelButton()" class="custom_red_button">Cancel</button>
+        <button (click)="cancelAddTask()" class="custom_red_button">Cancel</button>
       </div>
   </form>
+</div>
+<div *ngIf="backlogModal" class="backlog_modal">
+  <p>Backlog</p>
+  <div class="task_card" *ngFor="let itemTask of backlog">
+    <ul>
+      <li>{{itemTask.task}}</li>
+      <li>{{itemTask.describe}}</li>
+      <li>{{itemTask.points}}</li>
+    </ul>
+    <div class="task_additional_actions">
+      <button (click)="deleteTask(itemTask._id)">delete</button>
+      <button (click)="editTask(itemTask)">edit</button>
+      <button (click)="fromBackLog(itemTask._id)">to iteration</button>
+      <button (click)="changeStatus(itemTask._id, 'todo')">todo</button>
+      <button (click)="changeStatus(itemTask._id, 'done')">done</button>
+    </div>
+  </div>
+  <button (click)="cancelBacklog()" class="custom_red_button">Cancel</button>
 </div>

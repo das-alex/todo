@@ -48,6 +48,7 @@ export class TasksService {
             describe: description,
             status: status,
             points: points,
+            inBacklog: false,
             idUser: userId,
             idProject: projectId,
             idIteration: iterationId
@@ -75,7 +76,6 @@ export class TasksService {
         return this.http.patch(this.serverAdress + '/update/' + taskId,
             JSON.stringify(task), options)
             .map((response: Response) => {
-                console.log(response.json());
                 return response.json();
             });
     }
