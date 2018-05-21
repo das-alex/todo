@@ -116,6 +116,7 @@ users.post('/addUser', (req, res, next) => {
                         user.save()
                             .then(result => {
                                 res.status(201).json({
+                                    added: true,
                                     message: 'The user was added successfully'
                                 });
                             }).catch(err => {

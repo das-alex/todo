@@ -1,0 +1,92 @@
+.iterations_wrapper {
+    display: flex;
+}
+
+.iterations {
+    display: flex;
+    width: 290px;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.add_iteration {
+    padding: 20px 10px;
+}
+
+.add_iteration form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_elements {
+    padding-top: 10px;
+}
+
+.form_elements input {
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.add_iter_button {
+    padding: 5px 10px;
+}
+
+.concrete_iteration {
+    position: relative;
+    padding: 10px 10px;
+}
+
+.concrete_iteration:hover {
+    box-shadow: 0 0 1px 1px #ccc;
+    cursor: pointer;
+}
+
+.concrete_iteration:nth-child(n) {
+    border-bottom: 1px solid #ccc;
+}
+
+.name_of_iteration {
+    margin: 0;
+}
+
+.name_of_iteration:hover + .edit_iteration_tag {
+    display: block;
+}
+
+.edit_iteration_tag {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.tasks_for_iteration {
+    display: flex;
+    width: 85%;
+    flex-direction: column;
+}
+
+.modal_edit_iteration {
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    left: calc(50% - 150px);
+    top: calc(50% - 85px);
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    box-shadow: 0 0 3px 3px #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.form_edit_iteration {
+    display: flex;
+    height: inherit;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form_edit_iteration label {
+    font-size: 18px;
+}

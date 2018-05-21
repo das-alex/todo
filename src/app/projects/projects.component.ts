@@ -36,8 +36,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   openProject(projectId: string, projectName: string) {
-    this.dataShare.setStringData(projectId);
-    this.router.navigate(['/dashboard/tasks']);
+    this.router.navigate(['/dashboard/project/', projectId]);
   }
 
   addProject(projectName: string) {

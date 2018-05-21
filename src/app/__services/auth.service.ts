@@ -39,6 +39,25 @@ export class AuthServices {
             });
     }
 
+    registration(email: string, name: string, password: string): Observable<boolean> {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const options = new RequestOptions({ headers: headers });
+        const user = {
+            name: name,
+            email: email,
+            password: password
+        };
+        return this.http.post(this.serverAddres + '/addUser', JSON.stringify(user), options)
+            .map((res: Response) => {
+                const isRegistred = res.json() && res.json().added;
+                if (isRegistred) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+    }
+
     logout(): void {
         this.token = null;
         this.loggedIn = false;

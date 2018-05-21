@@ -3,6 +3,13 @@ var mongo = require('mongoose');
 var projectSchema = mongo.Schema({
     _id: mongo.Schema.Types.ObjectId,
     name: String,
+    backlog: [
+        {
+            name: String,
+            describe: String,
+            require: true
+        }
+    ],
     userOwner: {
         type: mongo.Schema.Types.ObjectId,
         ref: 'Users',

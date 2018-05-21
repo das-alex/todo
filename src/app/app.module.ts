@@ -26,7 +26,9 @@ const routs: Routes = [
     canActivateChild: [AuthGuardService],
     children: [
       { path: 'projects', component: ProjectsComponent },
-      { path: 'tasks', component: TasksComponent },
+      { path: 'project/:idProject', component: IterationsComponent, children: [
+        { path: 'iteration/:idIteration', component: TasksComponent}
+      ]},
       { path: '', redirectTo: '/dashboard/projects', pathMatch: 'full' }
     ]
   },

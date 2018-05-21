@@ -12,9 +12,9 @@ var checkAuth = require('../middleware/auth.middleware.js');
 // + get concrete task
 
 //get list of tasks
-tasks.get('/:projectId', checkAuth,(req, res, next) => {
-    Tasks.find({idProject: req.params.projectId})
-        .select('_id task status')
+tasks.get('/:projectId&:iterationId', checkAuth,(req, res, next) => {
+    Tasks.find({idProject: req.params.projectId, idIteration: req.params.iterationId})
+        .select('_id task status describe points')
         .exec()
         .then(data => {
             var response = {
@@ -23,6 +23,8 @@ tasks.get('/:projectId', checkAuth,(req, res, next) => {
                     return {
                         task: task.task,
                         status: task.status,
+                        describe: task.describe,
+                        points: task.points,
                         _id: task._id
                     }
                 })
@@ -55,9 +57,12 @@ tasks.post('/addTask', checkAuth,(req, res, next) => {
     var task = new Tasks({
         _id: new mongo.Types.ObjectId(),
         task: req.body.task,
+        describe: req.body.describe,
         status: req.body.status,
+        points: req.body.points,
         idUser: req.body.idUser,
-        idProject: req.body.idProject
+        idProject: req.body.idProject,
+        idIteration: req.body.idIteration
     });
     task.save()
         .then(data => {
@@ -73,7 +78,7 @@ tasks.post('/addTask', checkAuth,(req, res, next) => {
 });
 
 //delete task
-tasks.delete('/delete/:taskId', (req, res, next) => {
+tasks.delete('/delete/:taskId', checkAuth, (req, res, next) => {
     Tasks.find({_id: req.params.taskId})
         .remove()
         .exec()
@@ -99,10 +104,12 @@ tasks.delete('/delete/:taskId', (req, res, next) => {
 });
 
 //update task
-tasks.patch('/update/:taskId', (req, res, next) => {
+tasks.patch('/update/:taskId', checkAuth, (req, res, next) => {
     var task = new Tasks({
         task: req.body.task,
-        status: req.body.status
+        status: req.body.status,
+        describe: req.body.describe,
+        points: req.body.points
     });
     Tasks.findOneAndUpdate({_id: req.params.taskId}, {$set: task}, {new: true})
         .exec()

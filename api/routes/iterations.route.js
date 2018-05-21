@@ -5,8 +5,8 @@ var express = require('express'),
 var Iterations = require('../models/iterations.model.js');
 var checkAuth = require('../middleware/auth.middleware.js');
 
-// get list of iterations
-// create iteration
+// + get list of iterations
+// + create iteration
 // edit iteration
 
 iter.get('/:projectId', checkAuth, (req, res, next) => {
@@ -24,7 +24,7 @@ iter.get('/:projectId', checkAuth, (req, res, next) => {
             };
             res.status(200).json(response);
         })
-        .catch(catchError(getListOfIterError));
+        .catch(getListOfIterError => catchError(getListOfIterError));
 });
 
 iter.post('/', checkAuth, (req, res, next) => {
@@ -44,21 +44,21 @@ iter.post('/', checkAuth, (req, res, next) => {
                             addedIteration: iterationSave
                         });
                     })
-                    .catch(catchError(iterationSaveError));
+                    .catch(iterationSaveError => catchError(iterationSaveError));
             } else {
                 res.status(202).json({
                     message: 'Iteration with the same name is already exists'
                 });
             }
         })
-        .catch(catchError(addingIterationError));
+        .catch(addingIterationError => catchError(addingIterationError));
 });
 
 iter.patch('/:iterationId', checkAuth, (req, res, next) => {
     var iteration = new Iterations({
         name: req.body.name
     });
-    Tasks.findOneAndUpdate({_id: req.params.iterationId}, {$set: iteration}, {new: true})
+    Iterations.findOneAndUpdate({_id: req.params.iterationId}, {$set: iteration}, {new: true})
         .exec()
         .then(data => {
             res.status(200).json({
@@ -66,7 +66,7 @@ iter.patch('/:iterationId', checkAuth, (req, res, next) => {
                 updated: true
             });
         })
-        .catch(catchError(updatedIterationError));
+        .catch(updatedIterationError => catchError(updatedIterationError));
 });
 
 function catchError(error) {

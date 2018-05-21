@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthServices } from './auth.service';
 import 'rxjs/add/operator/map';
@@ -26,7 +26,7 @@ export class IterationService {
 
     getIterations(projectId: string) {
         const options = this.returnHeaders('auth');
-        this.http.get(this.serverUrl + '/' + projectId, options)
+        return this.http.get(this.serverUrl + '/' + projectId, options)
             .map((listOfIter: Response) => {
                 return listOfIter.json().iterations;
             });
@@ -38,7 +38,7 @@ export class IterationService {
             name: name,
             idProject: projectId
         };
-        this.http.post(this.serverUrl + '/', JSON.stringify(iteration), options)
+        return this.http.post(this.serverUrl + '/', JSON.stringify(iteration), options)
             .map((iterationResponse: Response) => {
                 return iterationResponse.json();
             });
@@ -49,7 +49,7 @@ export class IterationService {
         const iteration = {
             name: name
         };
-        this.http.patch(this.serverUrl + '/' + iterationId, JSON.stringify(iteration), options)
+        return this.http.patch(this.serverUrl + '/' + iterationId, JSON.stringify(iteration), options)
             .map((updateIterRes: Response) => {
                 return updateIterRes.json();
             });

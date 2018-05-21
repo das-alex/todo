@@ -1,3 +1,19 @@
-<p>
-  signup works!
-</p>
+<div class="register_card">
+  <form class="form_inside_card">
+    <h1>Registration</h1>
+    <p class="messages" *ngIf="messages">{{messages}}</p>
+    <div class="form_inputs">
+      <label for="inputLogin">Email</label>
+      <input class="custom_input" id="inputLogin" [(ngModel)]="email" name="email" type="text">
+      <label for="inputName">Name</label>
+      <input class="custom_input" id="inputName" [(ngModel)]="name" name="name" type="text">
+      <label for="inputPassword">Password</label>
+      <input class="custom_input" id="inputPassword" [(ngModel)]="password" name="password" type="password">
+    </div>
+    <button class="custom_red_button" (click)="registration(email, name, password)">Submit</button>
+  </form>
+  <div class="login_link">
+    <span>or</span>
+    <a href="/login">Log in</a>
+  </div>
+</div>

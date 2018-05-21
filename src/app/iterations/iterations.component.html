@@ -1,3 +1,32 @@
-<p>
-  iterations works!
-</p>
+<div class="iterations_wrapper">
+  <div class="iterations">
+    <div class="add_iteration">
+      <form action="">
+        <label for="thisIteration">Add iteration</label>
+        <div class="form_elements">
+          <input class="custom_input" name="thisIteration" [(ngModel)]="thisIteration" placeholder="name" type="text">
+          <button class="custom_green_button add_iter_button" (click)="addIteration(thisIteration)">Add</button>
+        </div>
+      </form>
+    </div>
+    <div class="list_of_iterations">
+      <div class="concrete_iteration" *ngFor="let iteration of iterations">
+        <p class="name_of_iteration" (click)="openTasksList(iteration._id)">{{iteration.name}}</p>
+        <span (click)="showButton(iteration._id, iteration.name)" class="edit_iteration_tag">edit</span>
+      </div>
+    </div>
+  </div>
+  <div class="tasks_for_iteration">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div *ngIf="editIterationModal" class="modal_edit_iteration">
+  <form class="form_edit_iteration" action="">
+    <label for="iterationNewName">{{iterationName}}</label>
+    <input [(ngModel)]="iterationNewName" id="iterationNewName" name="iterationNewName" class="custom_input" placeholder="new name" type="text">
+    <div class="form_edit_iteration_buttons">
+      <button (click)="updateIteration(iterationNewName)" class="custom_green_button">Change</button>
+      <button (click)="cancelButton()" class="custom_red_button">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -25,21 +25,32 @@ export class TasksService {
         return options;
     }
 
-    getListOfTasks(projectId: string): Observable<Tasks[]> {
+    getListOfTasks(projectId: string, iterationId): Observable<Tasks[]> {
         const options = this.returnHeaders('auth');
-        return this.http.get(this.serverAdress + '/' + projectId, options)
+        return this.http.get(this.serverAdress + '/' + projectId + '&' + iterationId, options)
             .map((tasksResult: Response) => {
                 return tasksResult.json().task;
             });
     }
 
-    addTask(task: string, userId: string, projectId: string, status: string): Observable<string> {
+    addTask(
+        task: string,
+        description: string,
+        status: string,
+        points: string,
+        userId: string,
+        projectId: string,
+        iterationId: string
+    ): Observable<string> {
         const options = this.returnHeaders('auth');
         const taskObj = {
             task: task,
+            describe: description,
             status: status,
+            points: points,
             idUser: userId,
-            idProject: projectId
+            idProject: projectId,
+            idIteration: iterationId
         };
         return this.http.post(
                 this.serverAdress + '/addTask',
@@ -51,6 +62,21 @@ export class TasksService {
             });
     }
 
-    deleteTask() {
+    deleteTask(taskId: string) {
+        const options = this.returnHeaders('auth');
+        return this.http.delete(this.serverAdress + '/delete/' + taskId, options)
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+
+    editTask(taskId: string, task: object) {
+        const options = this.returnHeaders('auth');
+        return this.http.patch(this.serverAdress + '/update/' + taskId,
+            JSON.stringify(task), options)
+            .map((response: Response) => {
+                console.log(response.json());
+                return response.json();
+            });
     }
 }

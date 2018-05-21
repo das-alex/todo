@@ -4,10 +4,14 @@
     <p class="messages" *ngIf="messages">{{messages}}</p>
     <div class="form_inputs">
       <label for="inputLogin">Email</label>
-      <input id="inputLogin" [(ngModel)]="email" name="email" type="text">
+      <input class="custom_input" id="inputLogin" [(ngModel)]="email" name="email" type="text">
       <label for="inputPassword">Password</label>
-      <input id="inputPassword" [(ngModel)]="password" name="password" type="password">
+      <input class="custom_input" id="inputPassword" [(ngModel)]="password" name="password" type="password">
     </div>
     <button class="custom_green_button" (click)="login(email, password)">Submit</button>
   </form>
+  <div class="register_link">
+    <span>or</span>
+    <a href="/signup">Registration</a>
+  </div>
 </div>

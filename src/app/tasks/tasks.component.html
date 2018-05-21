@@ -1,43 +1,84 @@
-<div class="task_add">
-  <p>Adding new task</p>
-  <p *ngIf="message">{{message.message}}</p>
-  <form action="">
-    <label for="">Task: <input [(ngModel)]="taskName" name="taskName" type="text"></label>
-    <button (click)="addTask(taskName)">Add</button>
-  </form>
-</div>
 <div class="tasks_table">
   <div class="tasks_todo">
     <h3>Todo</h3>
     <ng-container *ngIf="todo.length">
         <div class="task_card" *ngFor="let itemTask of todo">
-            <p>{{itemTask.task}}</p>
-            <div class="task_additional_actions">
-      
-            </div>
+          <ul>
+            <li>{{itemTask.task}}</li>
+            <li>{{itemTask.describe}}</li>
+            <li>{{itemTask.points}}</li>
+          </ul>
+          <div class="task_additional_actions">
+            <button (click)="deleteTask(itemTask._id)">delete</button>
+            <button (click)="editTask(itemTask)">edit</button>
           </div>
+        </div>
     </ng-container>
   </div>
   <div class="tasks_doing">
     <h3>Doing</h3>
     <ng-container *ngIf="doing.length">
         <div class="task_card" *ngFor="let itemTask of doing">
-            <p>{{itemTask.task}}</p>
-            <div class="task_additional_actions">
-              
-            </div>
+          <ul>
+            <li>{{itemTask.task}}</li>
+            <li>{{itemTask.describe}}</li>
+            <li>{{itemTask.points}}</li>
+          </ul>
+          <div class="task_additional_actions">
+            <button (click)="deleteTask(itemTask._id)">delete</button>
+            <button (click)="editTask(itemTask)">edit</button>
           </div>
+        </div>
     </ng-container>
   </div>
   <div class="tasks_done">
     <h3>Done</h3>
     <ng-container *ngIf="done.length">
         <div class="task_card" *ngFor="let itemTask of done">
-            <p>{{itemTask.task}}</p>
-            <div class="task_additional_actions">
-              
-            </div>
+          <ul>
+            <li>{{itemTask.task}}</li>
+            <li>{{itemTask.describe}}</li>
+            <li>{{itemTask.points}}</li>
+          </ul>
+          <div class="task_additional_actions">
+            <button (click)="deleteTask(itemTask._id)">delete</button>
+            <button (click)="editTask(itemTask)">edit</button>
           </div>
+        </div>
     </ng-container>
   </div>
+</div>
+<div *ngIf="addTaskModal" class="adding_new_task_modal">
+  <p>Adding new task</p>
+  <p *ngIf="message">{{message.message}}</p>
+  <form class="adding_new_task_form" action="">
+    <div class="inputs_group">
+        <label for="taskName">Task name</label><br>
+        <input class="custom_input" [(ngModel)]="taskName" id="taskName" name="taskName" type="text">
+    </div>
+    <div class="inputs_group">
+        <label for="description">Description</label><br>
+        <textarea class="custom_input" [(ngModel)]="description" id="description" name="description"></textarea>
+    </div>
+    <div class="inputs_group">
+      <label for="todoTask">todo</label>
+      <label for="doingTask">doing</label>
+      <label for="doneTask">done</label>
+      <input [(ngModel)]="status" name="status" id="todoTask" value="todo" type="radio" checked>
+      <input [(ngModel)]="status" name="status" id="doingTask" value="doing" type="radio">
+      <input [(ngModel)]="status" name="status" id="doneTask" value="done" type="radio">
+    </div>
+    <div class="inputs_group">
+        <label for="onePoint">1</label>
+        <label for="twoPoint">2</label>
+        <label for="threePoint">3</label>
+        <input [(ngModel)]="points" name="points" id="onePoint" value="1" type="radio">
+        <input [(ngModel)]="points" name="points" id="twoPoint" value="2" type="radio">
+        <input [(ngModel)]="points" name="points" id="threePoint" value="3" type="radio">
+      </div>
+    <div class="form_edit_task_buttons">
+        <button (click)="addTask(taskName,description,status,points)" class="custom_green_button">Save</button>
+        <button (click)="cancelButton()" class="custom_red_button">Cancel</button>
+      </div>
+  </form>
 </div>
